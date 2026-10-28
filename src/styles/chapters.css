@@ -1,0 +1,271 @@
+/* ───────── Shared chapter furniture ───────── */
+.chapter { position: relative; padding-top: 6px; }
+.chapter__head { text-align: center; margin: 6px auto 18px; max-width: 34rem; }
+.chapter__kicker { color: var(--ink-soft); font-size: 1.25rem; }
+.chapter__title { font-size: clamp(2rem, 7.5vw, 3rem); margin: 2px 0 8px; }
+.chapter__lede { color: var(--ink); opacity: 0.9; }
+.chapter__status { text-align: center; margin-top: 16px; font-size: 0.9rem; color: var(--ink-soft); }
+
+.fill-hill { fill: color-mix(in srgb, var(--color-deep-espresso) 70%, var(--color-vintage-brown)); }
+.fill-hill-2 { fill: color-mix(in srgb, var(--color-deep-espresso) 88%, var(--color-vintage-brown)); }
+
+/* ───────── Chapter 1: gift ───────── */
+.chapter--gift { text-align: center; }
+.gift__tape { position: absolute; top: -6px; left: 50%; width: 120px; height: 28px; transform: translateX(-50%) rotate(-3deg); z-index: 2; }
+.gift__tape svg { width: 100%; height: 100%; }
+.gift__head { padding-top: 22px; }
+.gift__hand { font-size: 1.4rem; color: var(--ink-soft); }
+.gift__title { font-size: clamp(2.1rem, 9vw, 3.6rem); margin: 4px 0 6px; }
+.gift__tagline { font-family: var(--font-display); font-style: italic; font-size: 1.2rem; color: var(--ink-soft); }
+.gift__stage { position: relative; display: flex; flex-direction: column; align-items: center; margin: 18px auto 8px; min-height: 330px; }
+.gift__bouquet { width: min(46vw, 170px); height: auto; position: absolute; left: -2px; top: 0; transform: rotate(-8deg); opacity: 0.95; }
+.gift__stamp { width: 56px; position: absolute; right: 2px; top: 6px; transform: rotate(7deg); }
+.gift__tap { margin-top: 10px; font-size: 1.4rem; color: var(--ink-soft); animation: bob 1.8s ease-in-out infinite; }
+.gift__skip { margin-top: 4px; }
+@keyframes bob { 50% { transform: translateY(-4px); } }
+.gift__card-slot { min-height: 260px; }
+.gift__card { text-align: left; max-width: 30rem; margin: 6px auto 0; animation: pop var(--dur) var(--ease-soft) both; }
+.gift__greet { font-size: 1.5rem; margin-bottom: 4px; }
+.gift__cta { margin-top: 16px; width: 100%; }
+
+/* Envelope built with CSS shapes so the flap can really rotate */
+.env {
+  position: relative; display: block; width: min(78vw, 300px); aspect-ratio: 10 / 7; margin-top: 120px;
+  background: none; border: 0; padding: 0; cursor: pointer; perspective: 800px; z-index: 1;
+  filter: drop-shadow(0 10px 14px color-mix(in srgb, var(--color-dark-cocoa) 25%, transparent));
+}
+.env[aria-disabled='true'] { cursor: default; }
+.env__back { position: absolute; inset: 0; background: var(--color-tangerine); border: 2.5px solid var(--color-vintage-brown); border-radius: 6px; }
+.env__letter {
+  position: absolute; left: 7%; right: 7%; top: 8%; height: 80%;
+  background-color: var(--color-cream); background-image: var(--grain); border: 1px solid var(--paper-edge); border-radius: 3px;
+  transition: transform 700ms var(--ease-soft); z-index: 1;
+}
+.env__letter-lines { position: absolute; inset: 16% 12% auto; height: 40%; background: repeating-linear-gradient(to bottom, var(--line-soft) 0 1.5px, transparent 1.5px 14px); opacity: 0.7; }
+.env__pocket {
+  position: absolute; inset: 0; z-index: 2; border-radius: 6px; pointer-events: none;
+  background: linear-gradient(to top right, color-mix(in srgb, var(--color-tangerine) 88%, var(--color-cream)) 49.5%, transparent 50%) left bottom / 50.3% 100% no-repeat,
+              linear-gradient(to top left, color-mix(in srgb, var(--color-tangerine) 88%, var(--color-cream)) 49.5%, transparent 50%) right bottom / 50.3% 100% no-repeat;
+  border: 2.5px solid var(--color-vintage-brown);
+  border-top-color: transparent;
+}
+.env__flap {
+  position: absolute; left: 0; right: 0; top: 0; height: 58%; z-index: 3;
+  background: color-mix(in srgb, var(--color-tangerine) 78%, var(--color-vintage-brown));
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 600ms var(--ease-soft), z-index 0s 300ms;
+}
+.env__seal {
+  position: absolute; left: 50%; top: 46%; width: 15%; aspect-ratio: 1; z-index: 4; transform: translate(-50%, -50%);
+  background: var(--color-dark-cocoa); border-radius: 50%; display: grid; place-items: center;
+  transition: opacity 200ms;
+}
+.env__seal-flower { width: 68%; height: 68%; }
+.env__to { position: absolute; left: 0; right: 0; bottom: 8%; z-index: 4; font-size: 1.3rem; color: var(--color-dark-cocoa); }
+.env--opening .env__flap, .env--open .env__flap { transform: rotateX(180deg); z-index: 0; }
+.env--opening .env__seal, .env--open .env__seal { opacity: 0; }
+.env--opening .env__letter, .env--open .env__letter { transform: translateY(-34%); }
+.env--open .env__to { opacity: 0.0; }
+@media (hover: hover) { .env--closed:hover { transform: rotate(-1deg) scale(1.02); } }
+.env--closed { animation: wiggle 3.6s ease-in-out 1.5s infinite; }
+@keyframes wiggle { 0%, 90%, 100% { transform: none; } 94% { transform: rotate(-1.6deg); } 97% { transform: rotate(1.4deg); } }
+
+@media (max-width: 400px) {
+  .gift__stage { min-height: 300px; }
+  .gift__bouquet { width: 34vw; }
+  .env { margin-top: 104px; }
+}
+
+/* ───────── Chapter 2: mixtapes ───────── */
+.tapes { display: grid; gap: 22px 16px; grid-template-columns: 1fr; margin-bottom: 20px; }
+@media (min-width: 560px) { .tapes { grid-template-columns: 1fr 1fr; } }
+.tape { transform: rotate(var(--tilt, 0deg)); }
+.tape__btn {
+  position: relative; display: block; width: 100%; padding: 0; background: none; border: 0; cursor: pointer; text-align: left;
+  filter: drop-shadow(0 6px 8px color-mix(in srgb, var(--color-dark-cocoa) 22%, transparent));
+  transition: transform var(--dur) var(--ease-soft);
+}
+.tape__btn.is-selected { transform: translateY(-4px) scale(1.02); }
+.tape__btn.is-selected .tape__art rect:nth-of-type(1) { stroke: var(--color-dark-cocoa); stroke-width: 4; }
+.tape__art { display: block; width: 100%; height: auto; }
+.tape__label {
+  position: absolute; left: 9.2%; right: 9.2%; top: 11%; height: 46%;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 4px;
+  color: var(--color-dark-cocoa); line-height: 1.25; overflow: hidden;
+}
+.tape__side { position: absolute; left: 6px; top: 0; font-size: 0.95rem; color: var(--color-vintage-brown); }
+.tape__title { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.05rem, 4.6vw, 1.35rem); }
+.tape__artist { font-size: 0.78rem; color: var(--color-vintage-brown); }
+.tape__sticker {
+  position: absolute; right: -6px; top: -10px; padding: 2px 10px; border-radius: 999px; transform: rotate(7deg);
+  background: var(--color-tangerine); color: var(--color-dark-cocoa); border: 1.5px solid var(--color-dark-cocoa); font-size: 1rem;
+}
+.tape__note { margin: 10px 4px 0; font-size: 0.9rem; color: var(--ink-soft); }
+.player { text-align: center; min-height: 190px; }
+.player__now { font-size: 0.9rem; margin-bottom: 10px; }
+.player__now .hand { font-size: 1.1rem; color: var(--color-vintage-brown); }
+.player__empty { font-size: 1.35rem; color: var(--color-vintage-brown); padding: 52px 0; }
+.player__embed iframe { border: 0; border-radius: 12px; display: block; background: var(--tint-peach); min-height: 152px; }
+.player__status { font-size: 1.1rem; color: var(--color-vintage-brown); margin-top: 6px; }
+.player__fallback { padding: 24px 8px; }
+.player__link, .player__fallback a { color: var(--color-dark-cocoa); display: inline-flex; align-items: center; min-height: var(--tap); text-underline-offset: 3px; }
+
+/* ───────── Chapter 3: flower diary ───────── */
+.diary { padding: 34px 14px 22px; min-height: 480px; background-image: var(--grain), repeating-linear-gradient(to bottom, transparent 0 31px, color-mix(in srgb, var(--color-peach) 35%, transparent) 31px 32px); }
+.diary__ribbon { position: absolute; top: 0; left: 0; width: 100%; height: 22px; border-radius: 6px 6px 0 0; }
+.blooms { position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 6px; justify-items: center; }
+@media (min-width: 560px) { .blooms { grid-template-columns: repeat(3, 1fr); } }
+.bloom { text-align: center; position: relative; }
+.bloom:nth-child(odd) { transform: rotate(-2deg) translateY(4px); }
+.bloom:nth-child(even) { transform: rotate(2.5deg) translateY(-6px); }
+.bloom__btn {
+  position: relative; display: block; width: clamp(104px, 30vw, 150px); aspect-ratio: 1; padding: 4px;
+  background: none; border: 0; cursor: pointer; border-radius: 50%;
+  transition: transform var(--dur) var(--ease-soft);
+}
+.bloom__btn:active { transform: scale(0.94) rotate(-6deg); }
+@media (hover: hover) { .bloom__btn:hover { transform: rotate(8deg) scale(1.06); } }
+.bloom__art { width: 100%; height: 100%; filter: drop-shadow(0 4px 4px color-mix(in srgb, var(--color-dark-cocoa) 22%, transparent)); }
+.bloom__btn.is-read::after { content: '✓'; position: absolute; right: 4px; bottom: 6px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 0.8rem; background: var(--color-dark-cocoa); color: var(--color-cream); }
+.bloom__label { font-size: 1.15rem; color: var(--color-vintage-brown); margin-top: -2px; }
+.bloom__petals i { position: absolute; left: 50%; top: 40%; width: 10px; height: 14px; border-radius: 80% 0 80% 0; background: var(--color-tangerine); opacity: 0; animation: petal 2.4s ease-out 1 both; }
+.bloom__petals i:nth-child(2) { animation-delay: 0.25s; left: 30%; }
+.bloom__petals i:nth-child(3) { animation-delay: 0.5s; left: 68%; }
+@keyframes petal { 0% { opacity: 0; transform: translateY(0) rotate(0); } 15% { opacity: 0.9; } 100% { opacity: 0; transform: translateY(70px) rotate(160deg) translateX(14px); } }
+.sprig { position: absolute; right: 14px; bottom: 12px; width: var(--tap); height: 60px; padding: 4px; background: none; border: 0; cursor: pointer; opacity: 0.8; transform: rotate(14deg); }
+.sprig.is-found { opacity: 1; }
+.sprig__art { width: 100%; height: 100%; }
+.flower-note { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; width: 100%; }
+.flower-note__art { width: 110px; height: 110px; animation: spin-in 700ms var(--ease-soft) both; }
+@keyframes spin-in { from { transform: rotate(-60deg) scale(0.6); opacity: 0; } to { transform: none; opacity: 1; } }
+.flower-note__latin { color: var(--color-vintage-brown); font-size: 1.15rem; }
+.flower-note__text { font-size: 1.05rem; }
+
+/* ───────── Chapter 4: secret hunt ───────── */
+.night {
+  position: relative; aspect-ratio: 4 / 3; width: 100%; border-radius: var(--radius-card); overflow: hidden;
+  background: radial-gradient(ellipse at 78% 18%, color-mix(in srgb, var(--color-tangerine) 24%, transparent), transparent 46%),
+              linear-gradient(to bottom, color-mix(in srgb, var(--color-deep-espresso) 82%, black), var(--color-deep-espresso) 60%, color-mix(in srgb, var(--color-vintage-brown) 40%, var(--color-deep-espresso)));
+  border: 1.5px solid var(--line); box-shadow: inset 0 0 40px rgb(0 0 0 / 0.35);
+}
+.night__scene { position: absolute; inset: 0; width: 100%; height: 100%; }
+.night__decoy, .clue {
+  position: absolute; transform: translate(-50%, -50%);
+  width: var(--tap); height: var(--tap); padding: 0; display: grid; place-items: center;
+  background: none; border: 0; cursor: pointer; border-radius: 50%;
+}
+.night__decoy-art { width: 16px; height: 16px; opacity: 0.8; animation: twinkle 3.4s ease-in-out infinite; }
+.night__decoy:nth-child(3n) .night__decoy-art { animation-delay: 1.1s; }
+.night__decoy:nth-child(3n + 1) .night__decoy-art { animation-delay: 2s; }
+@keyframes twinkle { 50% { opacity: 0.35; transform: scale(0.8); } }
+.clue__art { width: 30px; height: 30px; transition: transform var(--dur) var(--ease-soft), filter var(--dur); }
+.clue--moon .clue__art { width: 38px; height: 38px; }
+.clue--cassette .clue__art { width: 36px; height: 26px; }
+.clue--bright-star .clue__art { width: 24px; height: 24px; filter: drop-shadow(0 0 6px var(--glow-warm)); }
+.clue.is-found .clue__art { transform: scale(1.35); filter: drop-shadow(0 0 10px var(--color-tangerine)); }
+.clue.is-found::after { content: ''; position: absolute; inset: 2px; border-radius: 50%; border: 2px solid var(--color-tangerine); animation: ring 900ms ease-out 1 both; }
+@keyframes ring { from { transform: scale(0.6); opacity: 1; } to { transform: scale(1.6); opacity: 0; } }
+.hunt__progress { margin-top: 12px; text-align: center; font-weight: 600; color: var(--color-peach); }
+.hunt__message { font-weight: 500; font-size: 1.15rem; color: var(--color-cream); }
+.hunt__list { margin: 14px 0; display: grid; gap: 8px; }
+.hunt__item { display: flex; gap: 12px; align-items: flex-start; padding: 10px 12px; border: 1px dashed var(--line); border-radius: 12px; }
+.hunt__item.is-found { border-style: solid; border-color: var(--color-tangerine); background: color-mix(in srgb, var(--color-tangerine) 10%, transparent); }
+.hunt__mark { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 600; font-size: 0.85rem; border: 1.5px solid var(--color-peach); }
+.hunt__item.is-found .hunt__mark { background: var(--color-tangerine); color: var(--color-deep-espresso); border-color: var(--color-tangerine); }
+.hunt__text { display: flex; flex-direction: column; align-items: flex-start; gap: 0; font-size: 0.95rem; }
+.hunt__text .link-button { min-height: 32px; padding-left: 0; }
+.hunt__hint { color: var(--color-cream); opacity: 0.92; }
+.paper--night { background-color: color-mix(in srgb, var(--color-deep-espresso) 80%, var(--color-vintage-brown)); color: var(--color-cream); border-color: var(--color-peach); box-shadow: 0 0 28px var(--glow-warm); animation: pop var(--dur) var(--ease-soft) both; }
+.hunt__letter-title { font-size: 1.6rem; color: var(--color-tangerine); margin-bottom: 6px; }
+.hunt__skipnote { font-style: italic; opacity: 0.85; }
+.hunt__actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 16px; }
+
+/* ───────── Chapter 5: quiz ───────── */
+.quiz { padding: 22px 18px; transform: rotate(-0.4deg); }
+.quiz__progress { height: 6px; border-radius: 6px; background: var(--tint-peach); overflow: hidden; }
+.quiz__progress span { display: block; height: 100%; background: var(--color-tangerine); transition: width var(--dur) var(--ease-soft); }
+.quiz__count { margin-top: 8px; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-vintage-brown); }
+.quiz__fieldset { border: 0; margin: 10px 0 0; padding: 0; min-inline-size: 0; animation: pageIn var(--dur) var(--ease-soft) both; }
+.quiz__prompt { font-size: 1.55rem; padding: 0; margin-bottom: 14px; }
+.quiz__options { display: grid; gap: 10px; }
+.choice {
+  display: flex; align-items: center; gap: 12px; min-height: 54px; padding: 10px 14px; cursor: pointer;
+  background: var(--color-cream); border: 2px solid var(--color-vintage-brown); border-radius: 14px;
+  transition: background-color var(--dur-fast), transform var(--dur-fast);
+}
+.choice:active { transform: scale(0.985); }
+@media (hover: hover) { .choice:hover { background: var(--tint-tangerine); } }
+.choice__dot { flex: none; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--color-vintage-brown); background: var(--color-cream); }
+.choice.is-selected { background: var(--color-tangerine); border-color: var(--color-dark-cocoa); font-weight: 600; }
+.choice.is-selected .choice__dot { background: var(--color-dark-cocoa); border-color: var(--color-dark-cocoa); box-shadow: inset 0 0 0 4px var(--color-tangerine); }
+.quiz__nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 18px; }
+.quiz__nav .btn { flex: 1; }
+.result { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 26px 20px; animation: pop var(--dur) var(--ease-soft) both; }
+.result__art { width: 120px; height: 120px; }
+.result__art--wide { width: 170px; height: auto; }
+.result__kicker { font-size: 1.3rem; color: var(--color-vintage-brown); }
+.result__title { font-size: 2.4rem; }
+.result__thai { color: var(--color-vintage-brown); margin-bottom: 6px; }
+.result__message { font-size: 1.4rem; color: var(--color-vintage-brown); margin: 6px 0 10px; }
+
+/* ───────── Chapter 6: letters ───────── */
+.mails { display: grid; gap: 18px; }
+.mail { transform: rotate(var(--tilt, 0deg)); transition: transform var(--dur) var(--ease-soft); }
+.mail.is-open { transform: none; }
+.mail__btn {
+  display: flex; align-items: center; gap: 16px; width: 100%; padding: 12px; text-align: left; cursor: pointer;
+  background-color: var(--color-cream); background-image: var(--grain); border: 1.5px solid var(--color-vintage-brown); border-radius: 10px; box-shadow: var(--shadow-soft);
+}
+.mail__env { position: relative; flex: none; width: 96px; height: 66px; background: var(--tint-peach); border: 2px solid var(--color-vintage-brown); border-radius: 4px; }
+.mail__flap { position: absolute; left: -2px; right: -2px; top: -2px; height: 58%; background: var(--color-peach); border: 2px solid var(--color-vintage-brown); clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform 500ms var(--ease-soft); }
+.mail__pocket { position: absolute; inset: 0; background: linear-gradient(to top right, var(--tint-peach) 49%, transparent 50%) left / 50% 100% no-repeat, linear-gradient(to top left, var(--tint-peach) 49%, transparent 50%) right / 50% 100% no-repeat; }
+.mail__seal { position: absolute; left: 50%; top: 42%; width: 22px; height: 22px; transform: translate(-50%, -50%); border-radius: 50%; background: var(--color-tangerine); border: 1.5px solid var(--color-dark-cocoa); display: grid; place-items: center; transition: opacity 200ms; z-index: 2; }
+.mail__seal-art { width: 70%; height: 70%; }
+.mail.is-open .mail__flap { transform: rotateX(180deg); }
+.mail.is-open .mail__seal { opacity: 0; }
+.mail__caption { display: flex; flex-direction: column; min-width: 0; }
+.mail__no { color: var(--color-vintage-brown); font-size: 1.15rem; }
+.mail__theme { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; line-height: 1.2; }
+.mail__action { font-size: 0.85rem; color: var(--color-vintage-brown); text-decoration: underline; text-underline-offset: 3px; }
+.mail__letter { margin: 10px 6px 0; animation: unfold 520ms var(--ease-soft) both; transform-origin: top; background-image: var(--grain), repeating-linear-gradient(to bottom, transparent 0 29px, color-mix(in srgb, var(--color-peach) 30%, transparent) 29px 30px); }
+@keyframes unfold { from { opacity: 0; transform: scaleY(0.6) translateY(-10px); } to { opacity: 1; transform: none; } }
+.mail__heading { font-size: 1.55rem; color: var(--color-vintage-brown); margin-bottom: 8px; }
+.mail__signoff { font-size: 1.4rem; margin-top: 12px; text-align: right; }
+
+/* ───────── Chapter 7: somewhere between us ───────── */
+.chapter--between { isolation: isolate; }
+.between__glow { position: absolute; inset: -40px 0 auto; height: 420px; z-index: -1; background: radial-gradient(ellipse at 50% 30%, color-mix(in srgb, var(--color-tangerine) 38%, transparent), transparent 62%); pointer-events: none; }
+.between__stage { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.between__flower { position: relative; width: 190px; height: 190px; animation: sway 6s ease-in-out infinite; transform-origin: bottom center; }
+@keyframes sway { 50% { transform: rotate(2.2deg); } }
+.between__bloom { position: absolute; }
+.between__bloom--back { inset: 0; width: 100%; height: 100%; }
+.between__bloom--front { left: 25%; top: 25%; width: 50%; height: 50%; }
+.between__sprig { position: absolute; right: -26px; bottom: -6px; width: 42px; transform: rotate(18deg); }
+.between__fold { width: 100%; max-width: 30rem; }
+.between__folded { width: 100%; min-height: 120px; cursor: pointer; display: grid; place-items: center; font-size: 1.7rem; border-style: dashed; border-color: var(--color-tangerine); }
+.letter { width: 100%; max-width: 30rem; padding: 26px 22px; font-size: 1.05rem; background-image: var(--grain), repeating-linear-gradient(to bottom, transparent 0 33px, color-mix(in srgb, var(--color-peach) 30%, transparent) 33px 34px); animation: unfold 700ms var(--ease-soft) both; transform-origin: top; box-shadow: 0 14px 40px rgb(0 0 0 / 0.35), 0 0 30px var(--glow-warm); }
+.letter__signoff { font-size: 1.5rem; margin-top: 14px; color: var(--color-vintage-brown); }
+.reply { margin-top: 22px; text-align: center; }
+.reply__label { color: var(--ink); margin-bottom: 10px; }
+.reply__choices { display: grid; gap: 10px; max-width: 26rem; margin: 0 auto; }
+.reply__closing { min-height: 8px; margin-top: 16px; }
+.closing { max-width: 30rem; margin: 0 auto; text-align: left; animation: pop var(--dur) var(--ease-soft) both; }
+.closing__title { font-size: 1.7rem; margin-bottom: 6px; }
+.reply__replay { margin-top: 16px; }
+.reply__privacy { margin-top: 14px; font-size: 0.8rem; color: var(--ink-soft); }
+
+/* Wide screens: give the story room, keep text lines comfortable */
+@media (min-width: 1024px) {
+  .shell__top, .shell__main, .chapter-nav, .shell__meta { max-width: 860px; }
+  .shell__main { padding-top: 16px; }
+  .gift__bouquet { width: 200px; left: calc(50% - 300px); }
+  .gift__stamp { right: calc(50% - 300px); width: 68px; }
+}
+@media (max-width: 340px) {
+  .chapter__title { font-size: 1.8rem; }
+  .btn { padding-inline: 14px; }
+  .mail__env { width: 76px; height: 54px; }
+  .dot { width: 36px; }
+}

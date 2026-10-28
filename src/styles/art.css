@@ -1,0 +1,22 @@
+/* SVG colour classes — all read from the design tokens. */
+.fill-tang { fill: var(--color-tangerine); }
+.fill-tang-deep { fill: color-mix(in srgb, var(--color-tangerine) 78%, var(--color-vintage-brown)); }
+.fill-peach { fill: var(--color-peach); }
+.fill-cream { fill: var(--color-cream); }
+.fill-brown { fill: var(--color-vintage-brown); }
+.fill-cocoa { fill: var(--color-dark-cocoa); }
+.fill-leaf { fill: color-mix(in srgb, var(--color-peach) 60%, var(--color-vintage-brown)); }
+.fill-cassette { fill: color-mix(in srgb, var(--color-tangerine) 70%, var(--color-cream)); }
+.fill-none { fill: none; }
+.stroke-brown { stroke: var(--color-vintage-brown); }
+.stroke-cocoa { stroke: var(--color-dark-cocoa); }
+.stroke-tang { stroke: var(--color-tangerine); }
+.stroke-peach { stroke: var(--color-peach); }
+.stroke-cream { stroke: var(--color-cream); }
+.svg-hand { font-family: var(--font-hand); }
+
+svg { overflow: visible; }
+
+.reel { transform-box: fill-box; }
+.reel--spin g { animation: spin 3.2s linear infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes spin { to { transform: rotate(360deg); } }
